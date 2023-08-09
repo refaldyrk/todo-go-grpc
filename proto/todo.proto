@@ -1,0 +1,38 @@
+syntax="proto3";
+
+option go_package = "connector/todo";
+
+package connector;
+
+//Model
+message Todo {
+    string id = 1;
+    string name = 2;
+    bool is_done = 3;
+}
+
+//Request
+message AddTodoRequest {
+    Todo todo = 1;
+}
+
+message UpdateTodoRequest {
+    Todo todo = 1;
+}
+
+message DeleteTodoRequest {
+    string id = 1;
+}
+
+//Response
+message TodoResponse {
+    string message = 1;
+    Todo data = 2;
+    bool error = 3;
+}
+
+service TodoService{
+    rpc AddTodo(AddTodoRequest) returns (TodoResponse);
+    rpc UpdateTodo(UpdateTodoRequest) returns (TodoResponse);
+    rpc DeleteTodo(DeleteTodoRequest) returns (TodoResponse);
+}
